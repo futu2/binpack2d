@@ -1,5 +1,5 @@
 {
-  description = "h-raylib examples";
+  description = "binpack2d";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
