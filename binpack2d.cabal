@@ -18,7 +18,11 @@ author:              Topi Karvonen
 maintainer:          topi.karvonen@gmail.com
 -- copyright:
 category:            Data
-extra-source-files:  CHANGELOG.md
+extra-doc-files:     CHANGELOG.md
+
+source-repository head
+  type:             git
+  location:         git://github.com/futu2/binpack2d
 
 flag debug-exe
   description:         Build the debug executable.
@@ -28,14 +32,10 @@ flag debug-exe
 library
   ghc-options:         -Wno-tabs
   exposed-modules:     Data.BinPack2D
-  -- other-modules:
-  -- other-extensions:
-  -- default-extensions:  RecordWildCards
-  --                      BangPatterns
-  build-depends:       base >= 4.12.0.0
-                     , containers >= 0.6.0.1
-                     , vector >= 0.12.0.3
-  hs-source-dirs:      source
+  build-depends:       base >= 4.12.0.0 && < 5
+                     , containers >= 0.6.0.1 && < 1
+                     , vector >= 0.12.0.3 && < 1
+  hs-source-dirs:      src
   default-language:    GHC2021
 
 test-suite basic
@@ -44,17 +44,17 @@ test-suite basic
   main-is:             tests/basic.hs
   default-language:    GHC2021
   build-depends:       binpack2d
-                     , base >=4.12.0.0
-                     , containers >=0.6.0.1
-                     , tasty >=1.2.3
-                     , tasty-quickcheck >=0.10.1
+                     , base >=4.12.0.0 && < 5
+                     , containers >=0.6.0.1 && < 1
+                     , tasty >=1.2.3 && < 2
+                     , tasty-quickcheck >=0.10.1 && < 1
 
 executable debug-bin
   ghc-options:         -Wno-tabs
   main-is:             debug/debug-bin.hs
   default-language:    GHC2021
   build-depends:       binpack2d
-                     , base >=4.12.0.0
+                     , base >=4.12.0.0 && < 5
   if flag(debug-exe)
     buildable: True
   else

@@ -13,27 +13,16 @@
           pkgs = import inputs.nixpkgs { inherit system; };
 
           haskellPackages = pkgs.haskellPackages.override {
-            overrides = self: super: {
-              # h-raylib =
-              #   pkgs.haskell.lib.doJailbreak
-              #     (pkgs.haskell.lib.unmarkBroken super.h-raylib);
-              # haskell-language-server = pkgs.haskell.lib.compose.disableCabalFlag "ormolu" super.haskell-language-server;
-              # ormolu = super.fourmolu;
-              # hls-ormolu-plugin = super.hls-fourmolu-plugin;
-            };
+            overrides = self: super: { };
           };
 
           jailbreakUnbreak = pkg:
             pkgs.haskell.lib.doJailbreak (pkg.overrideAttrs (_: { meta = { }; }));
 
-          packageName = "h-raylib-examples";
+          packageName = "binpack2d";
         in
         {
-          packages.${packageName} = # (ref:haskell-package-def)
-            haskellPackages.callCabal2nix packageName ./. rec {
-              # Dependency overrides go here
-            };
-
+          packages.${packageName} = haskellPackages.callCabal2nix packageName ./. { };
           defaultPackage = inputs.self.packages.${system}.${packageName};
           devShell = inputs.self.packages.${system}.${packageName}.env.overrideAttrs (oldEnv: { buildInputs = oldEnv.buildInputs ++ [ haskellPackages.haskell-language-server ]; });
         };
