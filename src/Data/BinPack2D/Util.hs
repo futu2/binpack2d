@@ -18,7 +18,7 @@ packInSize totalSize sizes = fst <$> packing sizes (emptyBin totalSize)
   packing (s : ss) b0 =
     case pack s b0 of
       Nothing -> Left ("packing error at: " <> show (s, b0))
-      Just (pos, b1) -> first (<> [pos]) <$> packing ss b1
+      Just (pos, b1) -> first (pos :) <$> packing ss b1
   packing [] b0 = pure ([], b0)
 
 -- | pack info 2^n size rect
